@@ -1,1 +1,7 @@
 Convert between Roman Numeral and Base 10 and vice versa upto 3999
+
+Conversion of Roman Numerals to int.
+
+1. Identify unique tokens in input
+    I=>1, V=>5 X=>10 L=50 C=100 D=500 M=1000 
+2. 2. 
