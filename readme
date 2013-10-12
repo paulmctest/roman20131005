@@ -3,8 +3,8 @@ Convert between Roman Numeral and Base 10 and vice versa upto 3999
 Conversion of Roman Numerals to int.
 
 1. Identify unique tokens  
- $romanTokens       =   Array('I'=>1, 'V'=>5, 'X'=>10, 'L'=>50, 'C'=>100, 'D'=>500, 'M'=>1000 );
- $subtractionPairs  =   Array('V'=>'I', 'X'=>'I', 'L'=>, 'C'=>'X', 'D'=>'C', 'M'=>'C' );
+ $romanTokens       =   ['I'=>1, 'V'=>5, 'X'=>10, 'L'=>50, 'C'=>100, 'D'=>500, 'M'=>1000 ];
+ $subtractionPairs  =   ['V'=>'I', 'X'=>'I', 'L'=>, 'C'=>'X', 'D'=>'C', 'M'=>'C' ];
 
 
 toBase10
@@ -26,13 +26,13 @@ Tokens must be a key in $romanTokens;
 test cases:
 try/catch if $input is not numeric or $input <= 0 or $input > 3999 or contains spaces;
 if $previousValue !=  $subtractionPairs; (illegal strings)
-    $illegalValues = Array(
+    $illegalValues = [
                     'IM','VM','LM','DM', 
                     'ID','VD','LD','XD', 
                     'IC','VC','LD',
                     'IC', VC',
                     'VX' 
-                );
+                ];
     throw exception
 
 
