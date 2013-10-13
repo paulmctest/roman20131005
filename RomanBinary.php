@@ -10,7 +10,7 @@
     private $subtractionPairs       = ['IV', 'IX', 'XL', 'XC', 'CD', 'CM' ];
     private $illegalRomanValues     = [ 'IM','VM','LM','DM', 'ID','VD','LD','XD', 'IC','VC','LC', 'IC', 'VC', 'VX','DD','VV','LL', 'IIII', 'VVVV', 'XXXX', 'LLLL', 'CCCC','DDDD','MMMM' ];
 
-    function getBase10($input) {
+    function convertRomanNumeralsToBase10($input) {
 
         $returnValue = 0;
         # Only Roman numerals
@@ -44,6 +44,15 @@
         return $returnValue;
     } 
 
+    function convertBase10ToRoman($input) {
+        # Only Arabic numerals
+        if(preg_match('/[^0-9]/', $input)){
+            return 'Your string must only contain Arabic Numerals';
+        }
+        # Is this a legal string?
+
+        return $returnValue;
+    } 
     function checkValidRoman($string)
     {
         foreach($this->illegalRomanValues AS $testMatch){

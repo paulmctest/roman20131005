@@ -19,19 +19,19 @@ class RomanBinaryTest extends PHPUnit_Framework_TestCase {
    }
    function testItShouldFailOnNonRomanChars() {
       $rb = new RomanBinary();
-      $this->assertEquals('Your string must only contain Roman Numerals', $rb->getBase10('5'));
+      $this->assertEquals('Your string must only contain Roman Numerals', $rb->convertRomanNumeralsToBase10('5'));
    }
    function testItShouldFailOnNonRomanCharPatterns() {
       $rb = new RomanBinary();
       while (list(, $value) = each($this->illegalRomanPatterns)) {
-        $this->assertEquals('That is not a valid roman numeral', $rb->getBase10($value));
+        $this->assertEquals('That is not a valid roman numeral', $rb->convertRomanNumeralsToBase10($value));
       }
    }
    #Basic Single values test using romanTokes keys and values
    function testRomanSimpleSingles() {
       $rb = new RomanBinary();
       while (list($key, $value) = each($this->romanTokens)) {
-        $this->assertEquals($value, $rb->getBase10($key));
+        $this->assertEquals($value, $rb->convertRomanNumeralsToBase10($key));
       }
    }
 
@@ -39,7 +39,7 @@ class RomanBinaryTest extends PHPUnit_Framework_TestCase {
    function testRomanSimpleAddition(){
       $rb = new RomanBinary();
       while (list($key, $value) = each($this->validAdditionList)) {
-        $this->assertEquals($value, $rb->getBase10($key));
+        $this->assertEquals($value, $rb->convertRomanNumeralsToBase10($key));
       }
    }
 
@@ -47,7 +47,7 @@ class RomanBinaryTest extends PHPUnit_Framework_TestCase {
    function testRomanSimpleSubtraction(){
       $rb = new RomanBinary();
       while (list($key, $value) = each($this->validSubtractionList)) {
-        $this->assertEquals($value, $rb->getBase10($key));
+        $this->assertEquals($value, $rb->convertRomanNumeralsToBase10($key));
       }
    }
 }
