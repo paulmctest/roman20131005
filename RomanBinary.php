@@ -9,7 +9,34 @@
     private $romanTokens            = ['I'=>1, 'V'=>5, 'X'=>10, 'L'=>50, 'C'=>100, 'D'=>500, 'M'=>1000 ];
     private $subtractionPairs       = ['IV', 'IX', 'XL', 'XC', 'CD', 'CM' ];
     private $illegalRomanValues     = [ 'IM','VM','LM','DM', 'ID','VD','LD','XD', 'IC','VC','LC', 'IC', 'VC', 'VX','DD','VV','LL', 'IIII', 'VVVV', 'XXXX', 'LLLL', 'CCCC','DDDD','MMMM' ];
+    #Thousands, #Hundreds, #tens,#singles
+    private $arabicToBase10Maps     = [ 
+      [1=>'M', '2'=>'MM', '3'=>'MMM' ],
+      ['9'=> 'CM', '8' => 'DCCC', '7' => 'DCC', '6' => 'DC', '5' => 'D', '4'=>'CD','3' => 'CCC', '2' => 'CC', '1'=>'C'],
+      ['9'=> 'XC', 8 => 'LXXX', 7 => 'LXX', 6 => 'LX', 5 => 'L', 4=>'XL', 3 => 'XXX', 2 => 'XX', 1=>'X'],
+      ['9'=> 'IX', 8 => 'VIII', 7 => 'VII', '6' => 'VI', '5'=> 'V', 4=>'IV', '3'=> 'III', '2'=> 'II', '1'=>'I']
+    ];
 
+    function convertBase10ToRoman($input) {
+        $returnValue = '';
+        $input = preg_replace('/,\s/',"",$input);
+
+        # Only Arabic numerals
+        if(preg_match('/[^0-9]/', $input)){
+            return 'Your string must only contain Arabic Numerals';
+        }
+        
+        $count = 0;
+        $count = strlen($input) - 1;
+        while($count<strlen($input)){
+            $currentToken   = $input[$count]; 
+
+            $returnValue .= $this->arabicToBase10Maps[$count][$currentToken];
+            $count++;
+        }
+
+        return $returnValue;
+    } 
     function convertRomanNumeralsToBase10($input) {
 
         $returnValue = 0;
@@ -44,15 +71,6 @@
         return $returnValue;
     } 
 
-    function convertBase10ToRoman($input) {
-        # Only Arabic numerals
-        if(preg_match('/[^0-9]/', $input)){
-            return 'Your string must only contain Arabic Numerals';
-        }
-        # Is this a legal string?
-
-        return $returnValue;
-    } 
     function checkValidRoman($string)
     {
         foreach($this->illegalRomanValues AS $testMatch){
