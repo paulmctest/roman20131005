@@ -3,16 +3,17 @@ Convert between Roman Numeral and Base 10 and vice versa upto 3999
 Conversion of Roman Numerals to int.
 
 1. Identify unique tokens  
- $romanTokens       =   ['I'=>1, 'V'=>5, 'X'=>10, 'L'=>50, 'C'=>100, 'D'=>500, 'M'=>1000 ];
- $subtractionPairs  =   ['V'=>'I', 'X'=>'I', 'L'=>, 'C'=>'X', 'D'=>'C', 'M'=>'C' ];
+$romanTokens        =   ['I'=>1, 'V'=>'5', 'X'=>'10', 'L'=>50, 'C'=>100, 'D'=>500, 'M'=>1000 ];
+$subtractionPairs   =   ['V'=>'I', 'X'=>'I', 'L'=>'X', 'C'=>'X', 'D'=>'C', 'M'=>'C' ];
+$illegalValues      = [ 'IM','VM','LM','DM', 'ID','VD','LD','XD', 'IC','VC','LC', 'IC', 'VC', 'VX','DD','VV','LL' ];
+$legalExamples      = [ 'M','LM','DM', 'ID','VD','LD','XD', 'IC','VC','LC', 'IC', 'VC', 'VX' ];
+$additionList       = [ 'MM'=>2000,'MMM'=>3000 ];
 
 
 toBase10
 Roman numerals can be translated to base10 by looping through the string, mapping it to it's known base10 value and putting this in the currentTotal.
-    the $currentValue (roman) is then stored as $previousValue.
-    each following iteration compares the previous value to the current value. 
-        If the $previousValue is less than the currentvalue and is equal to the currenValue's subtractionPair[value] , // e.g., XL 
-            we have do $currentTotal = $previousValue - $currentValue;
+    the $currentValue is concatenated with the next value in the romanString and checked against the list of subtractionPairs. If it is present we add this value and skip the following arrayValue
+    Otherwise we add the value to the currentValue and go to the next iteration
         else if  $previousValue is less than the currentvalue and is NOT equal to the currenValue's subtractionPair[value] // e.g., VL
             we return an error
     else $currentTotal += $currentValue;
@@ -37,5 +38,24 @@ if $previousValue !=  $subtractionPairs; (illegal strings)
 
 
 
+Base10 to Arabic.
 
-    throw exception
+1. Max string length of 4 tokens
+2. array of 4 assoc Arrays 0 => thousands, 1 => hundreds, 
+    $arabicToBase10Maps =
+    [ [1=>'M'],          #thousands
+      [9=> 'IM', 8 => 'DCCC', 7 => 'DCC', 6 => 'DC', 5 => 'D', 4=>'CD', 3 => 'CCC', 2 => 'CC', 1=>'C'],#hundreds  
+      [9=> 'XC', 8 => 'LXXX', 7 => 'LXX', 6 => 'LX', 5 => 'L', 4=>'XL', 3 => 'XXX', 2 => 'XX', 1=>'X'],#Tens      
+      [9=> 'IX', 8 => 'VIII', 7 => 'VII', 6 => 'VI', 5 => 'V', 4=>'IV', 3 => 'III', 2 => 'II', 1=>'I'],#singles
+      ]
+    ]
+2. remove commas 
+3. check for valid chars
+4. 4 components [singles, tens, hundreds, thousands]
+
+5. loop through string as array
+   a) set a numeric counter to the length of the input string-1
+   b) loop through the string, asigning it's value into $currentToken and finding its key in the $arabicToBase10Maps[$counter[$currentToken]];
+   c) If $counter == 3 we do a multiplication of $arabicToBase10Maps[$counter[$currentToken]] * $currentToken to get our Thousands count. 
+   4) increment currentTotal 
+   %) return result
