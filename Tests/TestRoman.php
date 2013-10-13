@@ -5,10 +5,10 @@ require_once dirname(__FILE__) . '/../RomanBinary.php';
 class RomanBinaryTest extends PHPUnit_Framework_TestCase {
 
     private $romanTokens             = ['I'=>1, 'V'=>5, 'X'=>10, 'L'=>50, 'C'=>100, 'D'=>500, 'M'=>1000 ];
-    private $illegalValues           = [ 'IM','VM','LM','DM', 'ID','VD','LD','XD', 'IC','VC','LC', 'IC', 'VC', 'VX','DD','VV','LL' ];
+    private $illegalRomanValues           = [ 'IM','VM','LM','DM', 'ID','VD','LD','XD', 'IC','VC','LC', 'IC', 'VC', 'VX','DD','VV','LL' ];
     private $legalExamples           = [ 'M','LM','DM', 'ID','VD','LD','XD', 'IC','VC','LC', 'IC', 'VC', 'VX' ];
-    private $validAdditionList       = [ 'III' => 3, 'CC' => 200, 2000,'MMM'=>3000 ];
-    private $validSubtractionList    = ['IV'=>-4,'IX'=>9, 'XL' => -40, 'XC' => 90, 'CD'=>-400, 'CM' => 900 ];
+    private $validAdditionList       = [ 'MM'=>2000,'MMM'=>3000, 'III' => 3 ];
+    private $validSubtractionList    = ['IV'=>4,'IX'=>9, 'XL' => 40, 'XC' => 90, 'CD'=>400, 'CM' => 900 ];
 
    function testCanCreateClass() {
       $rb = new RomanBinary();

@@ -7,7 +7,7 @@
     class RomanBinary {
 
     private $romanTokens            = ['I'=>1, 'V'=>5, 'X'=>10, 'L'=>50, 'C'=>100, 'D'=>500, 'M'=>1000 ];
-    private $subtractionPairs       = ['I'=>'V', 'I'=>'X', 'X'=>'L', 'X' => 'C', 'C' => 'D', 'C' => 'M' ];
+    private $subtractionPairs       = ['IV', 'IX', 'XL', 'XC', 'CD', 'CM' ];
     private $illegalRomanValues     = [ 'IM','VM','LM','DM', 'ID','VD','LD','XD', 'IC','VC','LC', 'IC', 'VC', 'VX','DD','VV','LL' ];
 
     function getBase10($input) {
@@ -21,28 +21,29 @@
         if(in_array($input, $this->illegalRomanValues)){
             return 'That is not a valid roman numeral';
         }
-
+        # let's not loop for single values which are a simple lookup of existing arrays
         if(strlen($input) == 1) return $this->romanTokens[$input];
 
         $count = 0;
-        while($count<=strlen($input)){
+        while($count<strlen($input)){
             $currentToken   = $input[$count]; 
             $nextToken      = $input[$count+1];
-            
-        print "$count : str length of '$input' = ".strlen($input)."\n";
+            $checkToken     = $currentToken.$nextToken;
+           /* 
             if(in_array($currentToken.$nextToken, $this->illegalRomanValues)){
                 return 'That is not a valid roman numeral';
             }
+            */
             //do subtraction
-            if($this->subtractionPairs[$currentToken] == $nextToken )
+            if(in_array($checkToken, $this->subtractionPairs ))
             {
                 $sum = (int)$this->romanTokens[$nextToken] - (int)$this->romanTokens[$currentToken];
                 $returnValue += $sum;
+                //skip the next value
                 $count++;
             }else{
                 $returnValue += (int)$this->romanTokens[$input[$count]];
             }
-            #store currentToken for comparision in next iteration
             $count++;
         }
         return $returnValue;
