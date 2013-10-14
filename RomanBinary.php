@@ -20,17 +20,15 @@
     function convertBase10ToRoman($input) {
         $returnValue = '';
         $input = preg_replace('/,\s/',"",$input);
-
         # Only Arabic numerals
         if(preg_match('/[^0-9]/', $input)){
             return 'Your string must only contain Arabic Numerals';
         }
         
-        $count = 0;
-        $count = strlen($input) - 1;
-        while($count<strlen($input)){
-            $currentToken   = $input[$count]; 
-
+        $max = 4;
+        $count = $max - strlen($input);
+        $chars = str_split($input);
+        foreach($chars as $currentToken){
             $returnValue .= $this->arabicToBase10Maps[$count][$currentToken];
             $count++;
         }
