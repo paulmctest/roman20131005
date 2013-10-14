@@ -53,13 +53,11 @@ class RomanBinaryTest extends PHPUnit_Framework_TestCase {
       }
    }
 
-   /* 
-    * begin Arabic numeral tests 
-    */
+   /* begin Arabic numeral tests */
 
    function testArabicShouldReturnRoman() {
       $rb = new RomanBinary();
-      $this->assertEquals('X', $rb->convertBase10ToRoman('10'));
+      $this->assertEquals('X', $rb->convertBase10ToRoman(10));
    }
 
    function testItShouldFailOnNonNumeric() {
