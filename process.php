@@ -18,11 +18,11 @@ require_once dirname(__FILE__) . '/RomanBinary.php';
 // our JSON return code starts at 0;
 $aResponse['returnVal'] = 0;
 $oRb = new RomanBinary();
-if($_POST['check']=='roman'){
+if($_POST['check']==='roman'){
     $aResponse['returnVal'] = 1;
     $aResponse['response']  = $oRb->convertRomanNumeralsToBase10($_POST['input']);
 }
-if($_POST['check']=='arabic'){
+if($_POST['check']==='arabic'){
     $aResponse['returnVal'] = 1;
     $aResponse['response']  = $oRb->convertBase10ToRoman($_POST['input']);
 }
