@@ -2,6 +2,12 @@
 <html xmlns:fb="http://www.facebook.com/2008/fbml" xml:lang="en" lang="en">   
 <head>   
     <title>Roman Numeral tool</title>  
+    <style>
+        #showData{
+            width:200px;
+            height:250px;
+        }
+    </style>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script type="text/javascript">
     $( document ).ready(function() {
@@ -18,6 +24,7 @@
                    }) 
             .done(function( data ) {
                 var aResp = JSON.parse(data);
+                $('#showData').html(aResp.response);
             });
         });
     });
@@ -30,9 +37,9 @@
                 <input type="text" name="inputRoman" id="inputRoman" value="" /> Make Numeric <br>
                 <input type="text" name="inputArabic" id="inputArabic" value="" /> Make Roman <br>
             </div>  
-            <div id="showData"></div>                  
                               
-            <button name="submit" id="formSubmit" type="submit" class="subbutton">Convert!</button>  
+            <button name="submit" id="formSubmit" type="submit" class="subbutton">Convert!</button>  <br>
+            <div id="showData"></div>                  
         </form>             
     </div>  
                       
